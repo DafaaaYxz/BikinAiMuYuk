@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your AI Bot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Bot Creator</h1>
+            <p>Buat dan bagikan AI bot Anda sendiri dengan mudah!</p>
+        </header>
+        
+        <main>
+            <div class="card">
+                <h2>Buat AI Bot Anda</h2>
+                
+                <form id="botForm">
+                    <div class="form-group">
+                        <label for="botName">Nama Bot:</label>
+                        <input type="text" id="botName" name="botName" required placeholder="Masukkan nama untuk bot Anda">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="botDescription">Persona/Deskripsi:</label>
+                        <textarea id="botDescription" name="botDescription" required placeholder="Deskripsikan persona bot Anda. Contoh: 'Saya adalah asisten AI yang ramah dan membantu dengan pengetahuan luas tentang teknologi.'"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="botImage">URL Gambar Profil (opsional):</label>
+                        <input type="url" id="botImage" name="botImage" placeholder="https://example.com/image.jpg">
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Buat Bot</button>
+                </form>
+                
+                <div id="result" class="result hidden">
+                    <h3>Bot Berhasil Dibuat!</h3>
+                    <p>Link untuk mengobrol dengan bot Anda:</p>
+                    <div class="chat-link">
+                        <a id="chatLink" href="#" target="_blank"></a>
+                        <button id="copyLink" class="btn-secondary">Salin Link</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Bot Publik</h2>
+                <div id="publicBots" class="bots-grid">
+                    <!-- Daftar bot publik akan dimuat di sini -->
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
