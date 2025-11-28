@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Bot</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="chatContainer">
+    <h2 id="botTitle"></h2>
+    <div id="chatBox"></div>
+    <input id="msgInput" placeholder="Ketik pesan...">
+    <button id="sendBtn">Kirim</button>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script>
+    const socket = io();
+    const urlParams = new URLSearchParams(window.location.search);
+    const botId = urlParams.get('id');
+    const username = "Anda";
+
+    socket.emit("joinBot", botId);
+
+    socket.on("loadChats", (chats) => {
+      chats.forEach(c => appendMsg(c.sender, c.text));
+    });
+
+    socket.on("message", (data) => appendMsg(data.sender, data.text));
+
+    document.getElementById("sendBtn").onclick = () => {
+      const text = document.getElementById("msgInput").value;
+      if (!text) return;
+      socket.emit("sendMessage", { botId, user: username, text });
+      document.getElementById("msgInput").value = "";
+    };
+
+    function appendMsg(sender, text) {
+      const box = document.getElementById("chatBox");
+      const div = document.createElement("div");
+      div.className = sender === "Anda" ? "me" : "bot";
+      div.textContent = `${sender}: ${text}`;
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+  </script>
+</body>
+</html>
